@@ -1,0 +1,67 @@
+<h2>Editar Empleado</h2>
+
+<div class="row justify-content-center">
+    <div class="col-md-4">
+
+        <div class="card-body">
+
+            <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+
+                <div class="form-group">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" class="form-control" formControlName="nombre" />
+                    <!-- error de validacion -->
+                    <div style="color: red;" *ngIf="enviado && myForm['nombre'].errors?.['required']">
+                        El nombre es obligatorio
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="departamento">Departamento</label>
+                    <select class="custom-select form-control" (change)="actualizarDepartamento($event.target.value)" formControlName="departamento">
+                        <option value="">Selecciona el departamento...</option>
+                        <option *ngFor="let departamento of empleadoDepartamentos" value="{{ departamento }}">
+                            {{departamento}}</option>
+                    </select>
+                    <!-- error de validacion -->
+                    <div style="color: red;" *ngIf="enviado && myForm['departamento'].errors?.['required']">
+                        Debes seleccionar un departamento
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">E-Mail:</label>
+                    <input type="text" class="form-control" formControlName="email" />
+                    <!-- error de validacion -->
+                    <div style="color: red;" *ngIf="enviado && myForm['email'].errors?.['required']">
+                        El e-mail es obligatorio
+                    </div>
+                    <div style="color: red;" *ngIf="enviado && myForm['email'].errors?.['pattern']">
+                        El e-mail no es válido
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="telefono">Teléfono:</label>
+                    <input type="text" class="form-control" formControlName="telefono" />
+                    <!-- error de validacion -->
+                    <div style="color: red;" *ngIf="enviado && myForm['telefono'].errors?.['required']">
+                        El teléfono es obligatorio
+                    </div>
+                    <div style="color: red;" *ngIf="enviado && myForm['telefono'].errors?.['pattern']">
+                        Solo se permiten números
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <button class="btn btn-success btn-lg btn-block" type="submit">
+                        Actualizar
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+</div>
